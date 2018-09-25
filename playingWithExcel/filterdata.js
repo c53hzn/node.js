@@ -101,8 +101,7 @@ function processFile(thePath,theName){
             }
             /*处理空栏*/
 
-            arr.pop();//拿掉catalog_id
-            arr.pop();//拿掉catalog_type
+            arr.splice(arr.length-2,2);//拿掉catalog_type和catalog_id
             data.push(arr);
         }
 
@@ -127,12 +126,12 @@ function processFile(thePath,theName){
         }else{
             newFileName = "Done-" + newExtent;
         }
-        fs.writeFileSync("C:\\Users\\user\\Desktop\\stiger\\processed\\"+newFileName,buffer,{'flag':'w'});
-        console.log("C:\\Users\\user\\Desktop\\stiger\\processed\\" + newFileName + " created");
+        fs.writeFileSync(<target path> + newFileName,buffer,{'flag':'w'});
+        console.log(<target path> + newFileName + " created");
     }  
 }
 
-function clearTag(filepath){
+function fileOrDir(filepath){
     fs.stat(filepath,function(err,stats){
         if (err) {
             console.log(err);
@@ -165,7 +164,7 @@ function traverseDir(dir){
         var file;
         for(var i=0; i<len ;i++ ){
             file = files[i]; 
-            clearTag(dir+"\\"+file);
+            fileOrDir(dir+"\\"+file);
         }
     });
 }

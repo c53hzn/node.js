@@ -51,6 +51,7 @@ function processFile(thePath,kw_csv, data_csv){
 					rawData[i]["matched"] = kw_matched_str;
 					output_arr.push(rawData[i]);
 				}
+			    console.log("line " + i + " is done");
 		    }
 		    var output = json2csv(output_arr);
 		    fs.writeFileSync(__dirname + "\\" + "report.csv",output,{'flag':'w'});

@@ -20,7 +20,7 @@ function processFile(thePath, kw_csv, data_csv) {
 			kw_header_arr.push(key);
 		}
 		for (let j = 0; j < kw_json.length; j++) {
-			kw_arr.push(kw_json[j][kw_header_arr[0]].toLowerCase());
+			kw_arr.push(String(kw_json[j][kw_header_arr[0]]).toLowerCase());
 		}
 		processData(kw_arr);
 	});

@@ -13,7 +13,7 @@ function processFile(thePath,kw_csv, data_csv){
 	        console.log(err.stack);
 	        return;
 	    }
-	    var kw_arr = CSV.parse(String(data));
+	    var kw_arr = CSV.parse(String(data));//two dimension array
 	    
 	    kw_arr.shift();
 	    for (let j = 0; j < kw_arr.length; j++) {
@@ -29,7 +29,7 @@ function processFile(thePath,kw_csv, data_csv){
 		        console.log(err.stack);
 		        return;
 		    }
-		    var rawData = csv2json(String(data), {parseNumbers: true});
+		    var rawData = csv2json(String(data), {parseNumbers: true});//json array [{a: 1, b: 2}, {a: 3, b: 4}]
 		    var dynamicHeader = [];
 		    for (let i = 0; i < rawData.length; i++) {
 		    	let text = " ";

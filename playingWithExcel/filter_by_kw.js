@@ -38,16 +38,13 @@ function processFile(thePath, kw_csv, data_csv_arr) {
 			var rawData = csv2json(String(data), {
 				parseNumbers: true
 			});
-			var dynamicHeader = [];
 			for (let i = 0; i < rawData.length; i++) {
 				let text = " ";
 				for (let k in rawData[i]) {
 					text += String(rawData[i][k]).toLowerCase() + " ";
 				}
 				let pureText = text.replace(/(\[|\]|\{|\}|\-|\(|\)|\"|:|,|\/)/g, " ");
-
 				let pureTextSimplified = pureText.replace(/\s{2,}/, " ");
-
 				let kw_matched = [];
 				for (let j = 0; j < kw.length; j++) {
 					if (pureTextSimplified.indexOf(" " + kw[j] + " ") != -1) {

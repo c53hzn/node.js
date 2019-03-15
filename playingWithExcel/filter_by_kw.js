@@ -5,9 +5,9 @@ const json2csv = require('csvjson-json2csv');
 var rootPath = __filename;
 var current_dir = path.dirname(rootPath);
 
-processFile(current_dir, "keyword.csv", "data.csv");
+processFile(current_dir, "keyword.csv", ["data.csv"]);
 
-function processFile(thePath, kw_csv, data_csv) {
+function processFile(thePath, kw_csv, data_csv_arr) {
 	fs.readFile(thePath + "\\" + kw_csv, function (err, data) {
 		if (err) {
 			console.log(err.stack);
@@ -22,10 +22,12 @@ function processFile(thePath, kw_csv, data_csv) {
 		for (let j = 0; j < kw_json.length; j++) {
 			kw_arr.push(String(kw_json[j][kw_header_arr[0]]).toLowerCase());
 		}
-		processData(kw_arr);
+		for (let l = 0; l < data_csv.length; l++) {
+			processData(kw_arr, data_csv_arr[l]);
+		}
 	});
 
-	function processData(kw) {
+	function processData(kw, data_csv) {
 		fs.readFile(thePath + "\\" + data_csv, function (err, data) {
 			var output_arr = [];
 			if (err) {
@@ -60,9 +62,25 @@ function processFile(thePath, kw_csv, data_csv) {
 				console.log("line " + i + " is done");
 			}
 			var output = json2csv(output_arr);
-			fs.writeFileSync(__dirname + "\\" + "report.csv", output, {
+			var csv_name = data_csv.replace(/\.csv$/, "");
+			fs.writeFileSync(__dirname + "\\" + "report_" + csv_name +fullDate() + ".csv", output, {
 				'flag': 'w'
 			});
 		});
 	}
+}
+
+function fullDate(){
+    function addZero(a){
+		if(a < 10){
+			return "0" + a;
+		}else{
+			return a;
+		}
+	}
+    var timeNew = new Date();
+    var year = timeNew.getFullYear();
+    var month = addZero(timeNew.getMonth() + 1);
+    var date = addZero(timeNew.getDate());
+    return year + "-" + month + "-" + date;
 }

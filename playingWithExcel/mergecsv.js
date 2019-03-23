@@ -22,22 +22,22 @@ function fileContent(filepath, data_csv) {
 }
 
 function mergeFileInDir(dir){
-    fs.readdir(dir, function(error,files){
-        if (error){
-          console.log(error.stack);
-          return;
-        }
-        var output_arr = [];
-        for(let i=0 ; i < files.length ;i++ ){
-        	var filename_arr = files[i].split(".");
-        	if (filename_arr[filename_arr.length - 1].match(/(CSV|csv)/)) {
-        		let tempData = fileContent(dir, files[i]);
-        		output_arr = output_arr.concat(tempData);
-        	}
-        }
-        var output = json2csv(output_arr);
+	fs.readdir(dir, function(error,files){
+		if (error){
+			console.log(error.stack);
+			return;
+		}
+		var output_arr = [];
+		for(let i=0 ; i < files.length ;i++ ){
+			var filename_arr = files[i].split(".");
+			if (filename_arr[filename_arr.length - 1].match(/(CSV|csv)/)) {
+				let tempData = fileContent(dir, files[i]);
+				output_arr = output_arr.concat(tempData);
+			}
+		}
+		var output = json2csv(output_arr);
 		fs.writeFileSync(__dirname + "\\" + "merged.csv", output, {
 			'flag': 'w'
 		});
-    });
+	});
 }

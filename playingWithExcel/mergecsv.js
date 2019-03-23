@@ -8,7 +8,7 @@ var current_dir = path.dirname(rootPath);
 mergeFileInDir(current_dir);
 
 function fileContent(filepath, data_csv) {
-	if (data_csv == "merged.csv") {
+	if (data_csv != "merged.csv") {
 		var data = fs.readFileSync(filepath + "\\" + data_csv,'utf-8');
 		//json array [{a: 1, b: 2}, {a: 3, b: 4}]
 		var rawData = csv2json(String(data), {
@@ -34,13 +34,10 @@ function mergeFileInDir(dir){
         		let tempData = fileContent(dir, files[i]);
         		output_arr = output_arr.concat(tempData);
         	}
-            
         }
-
         var output = json2csv(output_arr);
 		fs.writeFileSync(__dirname + "\\" + "merged.csv", output, {
 			'flag': 'w'
 		});
-
     });
 }

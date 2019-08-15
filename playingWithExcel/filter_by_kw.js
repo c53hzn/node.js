@@ -54,7 +54,7 @@ function processFile(thePath, kw_csv, data_csv_arr) {
 				if (kw_matched.length) {
 					let kw_matched_str = kw_matched.join(",");
 					rawData[i]["matched"] = kw_matched_str;
-					output_arr.push(rawData[i]);
+					output_arr.push(rawData[i]);//如果没中的也需要导出的话就放外面
 				}
 				console.log("Row " + i + " is done");
 			}

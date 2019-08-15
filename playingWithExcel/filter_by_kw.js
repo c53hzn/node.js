@@ -22,7 +22,7 @@ function processFile(thePath, kw_csv, data_csv_arr) {
 		for (let j = 0; j < kw_json.length; j++) {
 			kw_arr.push(String(kw_json[j][kw_header_arr[0]]).toLowerCase());
 		}
-		for (let l = 0; l < data_csv.length; l++) {
+		for (let l = 0; l < data_csv_arr.length; l++) {
 			processData(kw_arr, data_csv_arr[l]);
 		}
 	});
